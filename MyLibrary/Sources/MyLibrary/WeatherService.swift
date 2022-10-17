@@ -13,7 +13,7 @@ class WeatherServiceImpl: WeatherService {
 
     func getTemperature(url: BaseURL) async throws -> Int {
         return try await withCheckedThrowingContinuation { continuation in
-            AF.request(url as! URLConvertible, method: .get).validate(statusCode: 200..<300).responseDecodable(of: Weather.self) { response in
+            AF.request(url.rawValue, method: .get).validate(statusCode: 200..<300).responseDecodable(of: Weather.self) { response in
                 switch response.result {
                 case let .success(weather):
                     let temperature = weather.main.temp
