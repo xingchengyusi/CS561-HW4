@@ -1,5 +1,5 @@
 public class MyLibrary {
-    private let weatherService: WeatherService
+    public let weatherService: WeatherService
 
     /// The class's initializer.
     ///
@@ -18,7 +18,7 @@ public class MyLibrary {
         // Fetch the current weather from the backend.
         // If the current temperature, in Farenheit, contains an 8, then that's lucky.
         do {
-            let temperature = try await weatherService.getTemperature()
+            let temperature = try await weatherService.getTemperature(url: BaseURL.openWeatherMap)
             return temperature.contains("8")
         } catch {
             return nil

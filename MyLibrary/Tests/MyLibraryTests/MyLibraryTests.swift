@@ -77,11 +77,25 @@ final class MyLibraryTests: XCTestCase {
         let jsonData = Data(jsonString.utf8)
         let jsonDecoder = JSONDecoder()
         let weather = try jsonDecoder.decode(Weather.self, from: jsonData)
-        
+
         // Test whether same as file
         XCTAssert(weather.main.temp == 295.83)
     }
     
     // Integration Test for WeatherServiceImpl
-    
+    func testWeatherServiceImplIntegration() async throws {
+        let weatherService = MyLibrary()
+        var mockTemperature = 0
+        var realTemp = 0
+
+        do {
+            mockTemperature = try await weatherService.weatherService.getTemperature(url: BaseURL.localMock)
+            realTemp = try await weatherService.weatherService.getTemperature(url: BaseURL.openWeatherMap)
+        } catch {
+            return
+        }
+        
+        XCTAssert(mockTemperature == Int(295.83))
+        XCTAssertGreaterThan(realTemp, 0)
+    }
 }

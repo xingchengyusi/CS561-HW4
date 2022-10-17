@@ -11,7 +11,7 @@ class MockWeatherService: WeatherService {
     }
 
     /// Returns current temperature in Farenheight
-    func getTemperature() async throws -> Int {
+    func getTemperature(url: BaseURL) async throws -> Int {
         switch (shouldSucceed, shouldReturnTemperatureWithAnEight) {
         case (true, true):
             return 38
