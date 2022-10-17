@@ -69,4 +69,19 @@ final class MyLibraryTests: XCTestCase {
         XCTAssertNil(isLuckyNumber)
     }
 
+    // Unit Test for Weather model.
+    func testIsStructWeatherHasCorrectTemp() throws {
+        // Use data.json as data resource.
+        let filepath = try XCTUnwrap(Bundle.module.path(forResource: "data", ofType: "json"))
+        let jsonString = try String(contentsOfFile: filepath)
+        let jsonData = Data(jsonString.utf8)
+        let jsonDecoder = JSONDecoder()
+        let weather = try jsonDecoder.decode(Weather.self, from: jsonData)
+        
+        // Test whether same as file
+        XCTAssert(weather.main.temp == 295.83)
+    }
+    
+    // Integration Test for WeatherServiceImpl
+    
 }

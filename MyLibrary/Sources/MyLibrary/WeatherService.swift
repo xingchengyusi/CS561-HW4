@@ -24,10 +24,10 @@ class WeatherServiceImpl: WeatherService {
     }
 }
 
-private struct Weather: Decodable {
-    let main: Main
+public struct Weather: Decodable {
+    public let main: Main
 
-    struct Main: Decodable {
-        let temp: Double
+    public struct Main: Decodable {
+        public let temp: Double
     }
 }
