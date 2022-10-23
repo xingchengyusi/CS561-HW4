@@ -96,6 +96,7 @@ final class MyLibraryTests: XCTestCase {
         }
         
         XCTAssert(mockTemperature == Int(295.83))
+        XCTAssertNotNil(realTemp)
         XCTAssertGreaterThan(realTemp, 0)
     }
 }
