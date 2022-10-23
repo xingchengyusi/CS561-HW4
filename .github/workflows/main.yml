@@ -1,0 +1,26 @@
+name: Swift
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v3.5.1
+    - name: Run Mock
+      working-directory: ./
+      run: | 
+        git clone https://github.com/xingchengyusi/CS561-HW2-MockSever
+        cd CS561-HW2-MockSever
+        node server.js &
+    - name: Build Swift
+      working-directory: ./MyLibrary
+      run: swift build
+    - name: Run Tests
+      working-directory: ./MyLibrary
+      run: swift test
